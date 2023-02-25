@@ -175,7 +175,7 @@
         <!-- 2023.02.12 开始使用, Funchat1.3.0开始使用 -->
 
         
-        <!--    ChatGPT 参数, 和付费版参数 -->
+        <!--    ChatGPT 参数, 和付费版参数 priceShowState: 0(默认两个价格都显示), 1(只显示周), 2(只显示月)-->
         <div hidden>
             {
                 "bundleId":"com.chatGPT.tool",
@@ -193,17 +193,20 @@
                         "simplified":{
                                 "weekDes":"¥28/周, 可随时取消",
                                 "monthDes":"¥58/月, 可随时取消",
-                                "closeAlpha":0.3
+                                "closeAlpha":0.3,
+                                "priceShowState":1
                         },
                         "traditional":{
                                 "weekDes":"¥28/週, 可隨時取消",
                                 "monthDes":"¥58/月, 可隨時取消",
-                                "closeAlpha":0.3
+                                "closeAlpha":0.3,
+                                "priceShowState":1
                         },
                         "english":{
                                 "weekDes":"$3.99/week, cancel anytime",
                                 "monthDes":"$7.99/month, cancel anytime",
-                                "closeAlpha":0.3
+                                "closeAlpha":0.3,
+                                "priceShowState":1
                         }
                 }
             }
