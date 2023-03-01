@@ -58,8 +58,7 @@ email_send_leftcount = 0
 
 print('初始apikey: '+current_key+'')
 
-
-updatehtml.updatehtml(current_key)
+updatehtml.push_to_remote('3333')
 
 
 # 定义函数，用于请求API接口
