@@ -1,6 +1,7 @@
 from bs4 import BeautifulSoup
 import base64
 import json
+import git
 
 
 def updatehtml(new_api_key) :
@@ -26,20 +27,49 @@ def updatehtml(new_api_key) :
             base64ApiKey_new = data.get('base64ApiKey_new')    
             base64ApiKey_vip_new = data.get('base64ApiKey_vip_new')    
             base64ApiKey_paid = data.get('base64ApiKey_paid')    
-            data['base64ApiKey'] = 'ffsfsfs'
+            data['base64ApiKey'] = new_base64ApiKey
         if bundle_id == 'com.HalChatAI.tool' :
             base64ApiKey = data.get('base64ApiKey')   
-            data['base64ApiKey'] = '1111222'
+            data['base64ApiKey'] = new_base64ApiKey
         
         # 将字典转换为JSON字符串
-        new_data = json.dumps(data)
-        print('转化为json: ' + new_data)
+        new_data = json.dumps(data, indent=4, ensure_ascii=False)
         # 用新的JSON字符串替换旧的字符串
         div_tag.string.replace_with(new_data)
 
 
     # 将修改后的HTML保存到文件中
-    with open('new_file.html', 'w') as f:
+    with open('../../test.html', 'w') as f:
         f.write(str(soup))
     
-    print('写入html文件, 写入key:'+new_api_key)
+    print('写入html成功, 写入key:'+new_api_key)
+
+    push_remote()
+
+
+
+def push_to_remote(new_api_key) :
+    # 本地仓库路径
+    local_repo_path = '../../'
+
+    # Git仓库URL
+    remote_repo_url = 'git@github.com:chengdengwei/chengdengwei.github.io.git'
+
+    # 获取仓库对象
+    repo = git.Repo(local_repo_path)
+
+
+
+    # 拉取最新的代码
+    repo.remotes.origin.pull()
+
+    # 修改HTML文件
+
+    # 添加修改后的文件到Git暂存区
+    repo.git.add('path/to/modified/file')
+
+    # 提交更改
+    repo.index.commit('Commit message')
+
+    # 推送更改到远程仓库
+    repo.remotes.origin.push()
